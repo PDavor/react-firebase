@@ -5,7 +5,10 @@ import Reset from "./pages/auth/Reset";
 import Home from "./pages/Home";
 import Secret from "./pages/protected/Secret";
 
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./configs/firebaseConfig";
 function App() {
+  initializeApp(firebaseConfig);
   return (
     <Router>
       <nav>
