@@ -11,7 +11,7 @@ import { firebaseConfig } from "./configs/firebaseConfig";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { saveUser } from "./redux/slice/authSlice";
-
+import ProtectedRoute from "./utils/ProtectedRoute";
 function App() {
   initializeApp(firebaseConfig);
   const auth = getAuth();
@@ -76,9 +76,9 @@ function App() {
         <Route exact path="/reset">
           <Reset />
         </Route>
-        <Route exact path="/protected">
-          <Secret />
-        </Route>
+
+        <ProtectedRoute exact path="/protected" component={Secret} />
+
         <Route exact path="/">
           <Home />
         </Route>
