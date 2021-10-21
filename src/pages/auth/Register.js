@@ -1,10 +1,23 @@
 import React, { useState } from "react";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState("");
+  const auth = getAuth();
   const handleRegister = () => {
-    //here will go code for sign i
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log("Registered user: ", user);
+        setEmail("");
+        setPassword("");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("Error ocured: ", errorCode, errorMessage);
+      });
   };
   return (
     <div>

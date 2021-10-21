@@ -1,9 +1,20 @@
 import React, { useState } from "react";
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 const Reset = () => {
   const [email, setEmail] = useState("");
+  const auth = getAuth();
+
   const handleReset = () => {
-    //here will go code for password reset
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log("success");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("An error has occured: ", errorCode, errorMessage);
+      });
   };
   return (
     <div>
